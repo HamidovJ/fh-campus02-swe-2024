@@ -28,6 +28,11 @@ public class CalculatorImpl implements Calculator {
                 return c;
             case mul:
                 return a * b;
+            case mod:
+                double m = a % b;
+                if (Double.isNaN(m))
+                    throw new CalculatorException("Modulo by zero");
+                return m;
         }
         return 0;
     }
