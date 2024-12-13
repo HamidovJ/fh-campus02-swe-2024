@@ -52,10 +52,6 @@ public class CalculatorTest {
 
     }
 
-
-
-
-
     //
     @Test(expected = CalculatorException.class)
     public void testPopOnEmptyStack() throws Exception {
@@ -82,6 +78,45 @@ public class CalculatorTest {
             assertEquals("Division by zero", e.getMessage());
             // e.getCause()
         }
+    }
 
+    @Test
+    public void testModOperation() throws Exception {
+
+        Calculator calc = new CalculatorImpl();
+        calc.push(8.0);
+        calc.push(3);
+        double result = calc.perform(Operation.mod);
+
+        assertEquals(2, result, 0);
+    }
+
+    @Test
+    public void testSimpleModOperation() throws Exception {
+
+        Calculator calc = new CalculatorImpl();
+        calc.push(10.0);
+        calc.push(1);
+        double result = calc.perform(Operation.mod);
+
+        assertEquals(0, result, 0);
+    }
+
+    @Test
+    public void testModuloByZero() throws Exception {
+
+        //Setup
+        Calculator calc = new CalculatorImpl();
+        try {
+            calc.push(7);
+            calc.push(0);
+            calc.perform(Operation.mod);
+
+            fail("Exception expected");
+
+        } catch (CalculatorException e) {
+            assertEquals("Modulo by zero", e.getMessage());
+            // e.getCause()
+        }
     }
 }
