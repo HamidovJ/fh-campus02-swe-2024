@@ -103,7 +103,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void testModuloByZero() throws Exception {
+    public void testModuloByZero() {
 
         //Setup
         Calculator calc = new CalculatorImpl();
@@ -118,5 +118,46 @@ public class CalculatorTest {
             assertEquals("Modulo by zero", e.getMessage());
             // e.getCause()
         }
+    }
+
+    @Test
+    public void testSimpleSinusOperation() throws Exception {
+
+        //Setup
+        Calculator calc = new CalculatorImpl();
+
+        calc.push(1);
+        double result = calc.perform(Operation.sin);
+
+        assertEquals(Math.sin(1), result, 0);
+    }
+
+    @Test
+    public void testMultipleValuesSinusOperation() {
+        Calculator calc = new CalculatorImpl();
+
+        try {
+            calc.push(1);
+            calc.push(1);
+            calc.perform(Operation.sin);
+
+            fail("Exception expected");
+
+
+        } catch (CalculatorException e) {
+            assertEquals("Sinus or Cosinus of two values not possible.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testSimpleCosinusOperation() throws Exception {
+
+        //Setup
+        Calculator calc = new CalculatorImpl();
+
+        calc.push(1);
+        double result = calc.perform(Operation.cos);
+
+        assertEquals(Math.cos(1), result, 0);
     }
 }
