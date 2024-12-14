@@ -42,7 +42,7 @@ public class ParserTest {
     }
 
     @Test
-    public void testParserModuloTestXml() throws Exception {
+   public void testParserModuloTestXml() throws Exception {
 
         Calculator cal = mock(Calculator.class);
 
