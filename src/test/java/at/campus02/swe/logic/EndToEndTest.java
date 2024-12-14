@@ -80,4 +80,35 @@ public class EndToEndTest {
 
         assertEquals(Math.cos(1), result, 0);
     }
+
+    @Test
+    public void testDotProductSimple() throws Exception {
+        Calculator calc = new CalculatorImpl();
+        Parser parser = new Parser(calc);
+
+        // Parse die XML-Datei
+        double result = parser.parse(new File("src/test/resources/E2EDotProductSimpleTest.xml"));
+
+        assertEquals(14.0, result, 0.001); // 1*2 + 3*4 = 14
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
