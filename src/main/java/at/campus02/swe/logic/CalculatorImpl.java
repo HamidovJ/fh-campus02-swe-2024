@@ -4,6 +4,7 @@ package at.campus02.swe.logic;
 import at.campus02.swe.Calculator;
 import at.campus02.swe.CalculatorException;
 
+import java.sql.Array;
 import java.util.Stack;
 
 import static java.lang.Float.NaN;
@@ -14,6 +15,30 @@ public class CalculatorImpl implements Calculator {
 
     @Override
     public double perform(Operation op) throws CalculatorException {
+        if(op == Operation.dotproduct) {
+            int vectorSize = (int) pop();
+            if (vectorSize <= 0) throw new CalculatorException("Ungültige Vektorgröße!");
+
+
+            double[] vector1 = new double[vectorSize];
+            double[] vector2 = new double[vectorSize];
+
+
+            for (int i = 0; i < vectorSize; i++) {
+                vector1[i] = pop();
+            }
+            for (int i = 0; i < vectorSize; i++) {
+                vector2[i] = pop();
+            }
+            
+            double result = 0.0;
+            for (int i = 0; i < vectorSize; i++) {
+                result += vector1[i] * vector2[i];
+            }
+
+            return result;
+        }
+
         double b = pop();
         double a = NaN;
 
