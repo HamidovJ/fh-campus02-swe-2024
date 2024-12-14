@@ -195,4 +195,24 @@ public class CalculatorTest {
         calc.push(-1.0);
         calc.perform(Operation.dotproduct);
     }
+
+    @Test
+    public void testDotProductIncompatibleSize() {
+        Calculator calc = new CalculatorImpl();
+
+        try {
+            calc.push(1.0);
+            calc.push(2.0);
+            calc.push(3.0);
+            calc.push(4.0);
+            calc.push(5.0);
+
+            calc.perform(Operation.dotproduct);
+
+            fail("Exception expected");
+
+        } catch (CalculatorException e) {
+            assertEquals("Nicht genügend Werte auf dem Stack für zwei Vektoren mit der angegebenen Größe.", e.getMessage());
+        }
+    }
 }
