@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<calculation>
+    <push value="1" />
+    <operation value="sin" />
+    <push value="Result" />
+    <push value="5" />
+    <operation value="+" />
+</calculation>
