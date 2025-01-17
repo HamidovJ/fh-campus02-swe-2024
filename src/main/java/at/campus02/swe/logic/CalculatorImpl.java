@@ -17,12 +17,17 @@ public class CalculatorImpl implements Calculator {
     public double perform(Operation op) throws CalculatorException {
         if(op == Operation.dotproduct) {
             int vectorSize = (int) pop();
-            if (vectorSize <= 0) throw new CalculatorException("Ungültige Vektorgröße!");
 
+            if (vectorSize <= 0) {
+                throw new CalculatorException("Ungültige Vektorgröße! Vektorgröße muss größer als 0 sein.");
+            }
+
+            if (stack_.size() < 2 * vectorSize) {
+                throw new CalculatorException("Nicht genügend Werte auf dem Stack für zwei Vektoren mit der angegebenen Größe.");
+            }
 
             double[] vector1 = new double[vectorSize];
             double[] vector2 = new double[vectorSize];
-
 
             for (int i = 0; i < vectorSize; i++) {
                 vector1[i] = pop();
@@ -30,13 +35,14 @@ public class CalculatorImpl implements Calculator {
             for (int i = 0; i < vectorSize; i++) {
                 vector2[i] = pop();
             }
-            
+
             double result = 0.0;
             for (int i = 0; i < vectorSize; i++) {
                 result += vector1[i] * vector2[i];
             }
 
             return result;
+
         }
 
         double b = pop();

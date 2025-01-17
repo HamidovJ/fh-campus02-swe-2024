@@ -160,4 +160,59 @@ public class CalculatorTest {
 
         assertEquals(Math.cos(1), result, 0);
     }
+
+    @Test
+    public void testDotProductSimple() throws Exception {
+        Calculator calc = new CalculatorImpl();
+        calc.push(1.0);
+        calc.push(3.0);
+        calc.push(2.0);
+        calc.push(4.0);
+        calc.push(2.0);
+        double result = calc.perform(Operation.dotproduct);
+        assertEquals(14.0, result, 0.001);
+    }
+
+    @Test
+    public void testDotProduct3D() throws Exception {
+        Calculator calc = new CalculatorImpl();
+        calc.push(1.0);
+        calc.push(2.0);
+        calc.push(3.0);
+        calc.push(4.0);
+        calc.push(5.0);
+        calc.push(6.0);
+        calc.push(3.0);
+        double result = calc.perform(Operation.dotproduct);
+        assertEquals(32.0, result, 0.001);
+    }
+
+    @Test(expected = CalculatorException.class)
+    public void testDotProductInvalidSize() throws Exception {
+        Calculator calc = new CalculatorImpl();
+        calc.push(1.0);
+        calc.push(2.0);
+        calc.push(-1.0);
+        calc.perform(Operation.dotproduct);
+    }
+
+    @Test
+    public void testDotProductIncompatibleSize() {
+        Calculator calc = new CalculatorImpl();
+
+        try {
+            calc.push(1.0);
+            calc.push(2.0);
+            calc.push(3.0);
+            calc.push(4.0);
+            calc.push(5.0);
+
+            calc.perform(Operation.dotproduct);
+
+            fail("Exception expected");
+
+        } catch (CalculatorException e) {
+            assertEquals("Nicht genügend Werte auf dem Stack für zwei Vektoren mit der angegebenen Größe.", e.getMessage());
+        }
+    }
 }
